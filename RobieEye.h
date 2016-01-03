@@ -8,14 +8,14 @@
 #define RobieEye_h
 
 #include "Arduino.h"
+#include "Adafruit_PWMServoDriver.h"
 
 class RobieEye
 {
     public:
-        Eye(int channel);
+        RobieEye(int channel);
+        void setupPWM();
         void setColor(int red, int green, int blue);
-        void off();
-        void blink;
     private:
         int _channel;
         int _red;
