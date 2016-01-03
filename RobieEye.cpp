@@ -16,38 +16,12 @@ void RobieEye::setupPWM()
 
 void RobieEye::setColor(int red, int green, int blue)
 {
-    _red = red;
-    _green = green;
-    _blue = blue;
-
-    int offPulse[] = {4096, 0};
-    int onPulse[] = {0, 4096};
-
-    if (_red > 0)
-    {
-        PWM.setPWM(_channel, onPulse[0], onPulse[1]);
-    } 
-    else
-    {
-        PWM.setPWM(_channel, offPulse[0], offPulse[1]);
-    }
-
-    if (_blue > 0)
-    {
-        PWM.setPWM((_channel+1), onPulse[0], onPulse[1]);
-    } 
-    else
-    {
-        PWM.setPWM((_channel+1), offPulse[0], offPulse[1]);
-    }
-
-    if (_green > 0)
-    {
-        PWM.setPWM((_channel+2), onPulse[0], onPulse[1]);
-    } 
-    else
-    {
-        PWM.setPWM((_channel+2), offPulse[0], offPulse[1]);
-    }
+    _red = map(red, 0, 255, 0, 4096);
+    _green = map(green, 0, 255, 0, 4096);
+    _blue = map(blue, 0, 255, 0, 4096);
+    
+    PWM.setPin(_channel, _red,1);
+    PWM.setPin((_channel+1), _blue,1);
+    PWM.setPin((_channel+2), _green,1);
 
 }
